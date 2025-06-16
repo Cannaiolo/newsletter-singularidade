@@ -36,7 +36,7 @@ export const noticias = [
   },
   {
     titulo: "Post de Raony Phillips misturando sátira e nostalgia. Marisa Maiô é uma apresentadora criada 100% com IA, ela simula programas de auditório e presta tributo a apresentadoras clássicas da TV com ajuda da IA",
-    "Em tom provocativo, Raony compartilha uma reflexão sobre o uso da IA e como ela pode impactar a forma como consumimos informação e cultura no Brasil.",
+    resumo: "Em tom provocativo, Raony compartilha uma reflexão sobre o uso da IA e como ela pode impactar a forma como consumimos informação e cultura no Brasil.",
     link: "https://www.instagram.com/p/DKw5ELBuh_r"
   }
 ];
