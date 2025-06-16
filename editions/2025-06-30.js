@@ -2,7 +2,7 @@ export const noticias = [
   {
     titulo: "A guerra na Ucrânia virou parte do currículo escolar na Rússia",
     resumo: "O governo Putin lançou um programa educacional para treinar operadores de drones, integrando conteúdos militares ao currículo escolar. A meta é formar 1 milhão de profissionais até 2030.",
-    link: "https://www.thenewswaffle.com/newsletter/a-guerra-na-ucrania-virou-parte-do-curriculo-escolar-na-russia"
+    link: "https://thenews.waffle.com.br/tecnologia/a-guerra-na-ucrania-virou-parte-do-curriculo-escolar-na-russia"
   },
   {
     titulo: "Operações orientadas por IA com poucos cliques!",
