@@ -12,7 +12,7 @@ export const noticias = [
   {
     titulo: "Carros voadores viram realidade?",
     resumo: "Trump assinou um decreto executivo incentivando o desenvolvimento de eVTOLs nos EUA, com apoio à infraestrutura, regulamentação e subsídios para fabricantes. A medida pode acelerar a mobilidade aérea urbana.",
-    link: "https://www.whitehouse.gov/briefing-room/statements-releases/2024/06/10/executive-order-on-advancing-u-s-leadership-in-aviation-and-aerospace/"
+    link: "https://www.whitehouse.gov/presidential-actions/2025/06/unleashing-american-drone-dominance/"
   },
   {
     titulo: "A Singularidade Suave",
