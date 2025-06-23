@@ -27,17 +27,17 @@ export const noticias = [
   {
     titulo: "Revolução da Programação Vibe: IA transforma o ato de codar",
     resumo: "O conceito de 'vibe coding', popularizado por Andrej Karpathy, descreve uma nova forma de programar com IA — fluida, natural e centrada em resolver problemas em vez de escrever sintaxe. Plataformas como Cursor permitem gerar código com comandos em linguagem natural.",
-    link: "https://thenextweb.com/news/ai-as-socially-vital-as-water-and-energy-say-uk-execs"
+    link: "https://www.businessinsider.com/openai-cofounder-greg-brockman-vibe-coding-fun-engineering-swe-quality-2025-6?utm_source=chatgpt.com"
   },
   {
     titulo: "xAI queima US$ 1 bi por mês e busca mais US$ 4,3 bi",
     resumo: "A startup de Elon Musk está investindo pesado em IA generativa e infraestrutura com gastos mensais de US$ 1 bilhão. A empresa negocia nova rodada de captação e reforça que a escala e o custo dos modelos definem vantagem competitiva no setor.",
-    link: "https://www.theinformation.com/articles/openai-seeks-new-financial-concessions-microsoft-top-shareholder"
+    link: "https://br.investing.com/news/company-news/xai-supostamente-gasta-mais-de-us-1-bilhao-por-mes-1585811"
   },
   {
     titulo: "Trump lança operadora ‘Trump Mobile’ e redefine o marketing político",
     resumo: "Donald Trump lançou um serviço de telefonia com seu nome, misturando marketing direto, monetização da base eleitoral e populismo digital. A estratégia transforma a campanha em negócio e vice-versa.",
-    link: "https://www.cnbc.com/amp/2025/06/16/openai-wins-200-million-us-defense-contract.html" // (sem link oficial do Trump Mobile; mantido o da CNBC como placeholder)
+    link: "https://www.meioemensagem.com.br/marketing/trump-mobile-empresa-do-presidente-dos-eua-ingressa-na-telefonia-movel"
   },
   {
     titulo: "CEO da Amazon compartilha novas lições sobre IA",
