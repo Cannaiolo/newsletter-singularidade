@@ -11,7 +11,7 @@ export default {
     {
       titulo: "IA deixando corretores mais lucrativos",
       resumo:
-        "No episódio de 9 de julho do Playmakers, Joe Lonsdale (cofundador da Palantir) explica como agentes imobiliários que adotam IA mês a mês podem aumentar significativamente sua eficiência e rentabilidade em um mercado cada vez mais competitivo",
+        "No episódio de 9 de julho do Playmakers, Joe Lonsdale (cofundador da Palantir) explica como corretores imobiliários que adotam IA dia após dia podem aumentar significativamente sua eficiência e rentabilidade em um mercado cada vez mais competitivo",
       link: "https://www.realestatenews.com/2025/07/09/playmakers-how-ai-can-make-agents-a-lot-more-profitable"
     },
     {
