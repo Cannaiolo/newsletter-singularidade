@@ -1,4 +1,4 @@
-export default {
+const noticias {
   sumario: [
     "Tubarões ao redor da OpenAI",
     "Fraude de IA se passando por Marco Rubio",
