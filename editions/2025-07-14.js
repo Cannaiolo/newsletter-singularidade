@@ -2,7 +2,7 @@ export default {
   sumario: [
     "IA deixando corretores mais lucrativos",
     "Tubarões ao redor da OpenAI",
-    "Fraude de IA se passando por Marco Rubio",
+    "Fraude de IA se passando por Marco Rubio (Secretário de Estado dos EUA)",
     "Contrato para uso de réplica digital protege artistas contra IA",
     "Lançamento iminente do Grok 4 da xAI (Elon Musk)",
     "CEO da Nvidia prepara visita à China em meio a restrições à exportação de chips"
@@ -21,7 +21,7 @@ export default {
       link: "https://www.linkedin.com/news/story/sharks-are-circling-openai-6132937/"
     },
     {
-      titulo: "Fraude de IA se passando por Marco Rubio (Secretário de Estado dos EUA)",
+      titulo: "Fraude de IA se passando por Marco Rubio",
       resumo:
         "Um impostor usou IA para simular a voz e textos do Secretário de Estado dos EUA, Marco Rubio, em mensagens e voicemails para autoridades, com o objetivo de obter acesso a informações sensíveis. O Departamento de Estado investiga o caso.",
       link: "https://www.theguardian.com/us-news/2024/jul/08/ai-scam-marco-rubio-targets"
