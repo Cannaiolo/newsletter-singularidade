@@ -33,3 +33,5 @@ export default {
     link: "https://www.nextbigfuture.com/2024/07/nvidia-ceo-visit-china-ai-chips.html"
   }
 ]
+
+export default noticias;
