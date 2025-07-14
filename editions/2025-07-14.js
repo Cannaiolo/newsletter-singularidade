@@ -1,12 +1,19 @@
 export default {
   sumario: [
+    "IA deixando corretores mais lucrativos",
     "Tubarões ao redor da OpenAI",
     "Fraude de IA se passando por Marco Rubio",
-    "Contrato para uso de réplica digital protege contra IA",
+    "Contrato para uso de réplica digital protege artistas contra IA",
     "Lançamento iminente do Grok 4 da xAI (Elon Musk)",
-    "CEO da Nvidia prepara visita à China em meio a restrições"
+    "CEO da Nvidia prepara visita à China em meio a restrições à exportação de chips"
   ],
   blocos: [
+    {
+      titulo: "IA deixando corretores mais lucrativos",
+      resumo:
+        "No episódio de 9 de julho do Playmakers, Joe Lonsdale (cofundador da Palantir) explica como agentes imobiliários que adotam IA mês a mês podem aumentar significativamente sua eficiência e rentabilidade em um mercado cada vez mais competitivo"
+      link: "https://www.realestatenews.com/2025/07/09/playmakers-how-ai-can-make-agents-a-lot-more-profitable"
+    },
     {
       titulo: "Tubarões ao redor da OpenAI",
       resumo:
@@ -14,7 +21,7 @@ export default {
       link: "https://www.linkedin.com/news/story/sharks-are-circling-openai-6132937/"
     },
     {
-      titulo: "Fraude de IA se passando por Marco Rubio",
+      titulo: "Fraude de IA se passando por Marco Rubio (Secretário de Estado dos EUA)",
       resumo:
         "Um impostor usou IA para simular a voz e textos do Secretário de Estado dos EUA, Marco Rubio, em mensagens e voicemails para autoridades, com o objetivo de obter acesso a informações sensíveis. O Departamento de Estado investiga o caso.",
       link: "https://www.theguardian.com/us-news/2024/jul/08/ai-scam-marco-rubio-targets"
