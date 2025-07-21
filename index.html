@@ -1,59 +1,117 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Guardiões da SINGULARIDADE: Entre vozes e algoritmos</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module">
-      import noticias from './editions/2025-07-14.js';
-      window.noticias = noticias;
-    </script>
-  </head>
-  <body class="bg-gray-100 text-gray-800 p-4">
-    <div class="max-w-3xl mx-auto">
-      <img src="https://images2.imgbox.com/43/dc/0Sz1QYww_o.png" alt="Logo" class="mx-auto w-40 mb-6" />
-      <h1 class="text-3xl font-bold text-center">Guardiões da SINGULARIDADE</h1>
-      <p class="text-center text-gray-600 text-lg mb-6">A news da sua Segunda-feira</p>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guardiões da SINGULARIDADE</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(1rem); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fade-in 0.5s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800 p-4">
+  <div class="max-w-3xl mx-auto">
+    <img src="https://images2.imgbox.com/43/dc/0Sz1QYww_o.png"
+         alt="Logo Guardiões da Singularidade"
+         class="mx-auto w-40 mb-6">
 
-      <section id="sumario" class="mb-10">
-        <h2 class="text-xl font-semibold mb-2">Tópicos desta edição:</h2>
-        <ul class="list-disc pl-5 space-y-2" id="lista-sumario"></ul>
-      </section>
+    <h1 id="page-title" class="text-3xl font-bold text-center mb-1">
+      Guardiões da SINGULARIDADE
+    </h1>
+    <p id="page-subtitle" class="text-center text-gray-600 text-lg mb-6">
+      A news da sua Segunda-feira
+    </p>
 
-      <div id="noticias" class="space-y-10"></div>
+    <section id="sumario" class="mb-10">
+      <h2 class="text-xl font-semibold mb-2">Tópicos desta edição:</h2>
+      <ul id="lista-sumario" class="list-disc pl-5 space-y-2"></ul>
+    </section>
 
-      <div class="mt-10 p-4 bg-white rounded-2xl shadow text-center">
-        <p class="text-xl font-semibold mb-2">🥋 Novo ciclo aberto — Inteligência Aumentada para executivos</p>
-        <p class="text-gray-700 mb-2">11 vagas para quem quer comandar o jogo com IA — não ser comandado por ele.</p>
-        <a href="https://www.canva.com/design/DAGqWdKBIM8/8TpHf9K3ATTbpTLfra3ZQA/view?utm_content=DAGqWdKBIM8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=ha1f8fd8801" target="_blank" class="text-indigo-600 font-medium hover:underline">→ Torne-se um Guardião da Singularidade</a>
-      </div>
+    <div id="noticias" class="space-y-10"></div>
+
+    <div class="mt-10 p-4 bg-white rounded-2xl shadow text-center">
+      <p class="text-xl font-semibold mb-2">
+        🥋 Novo ciclo aberto — Inteligência Aumentada para executivos
+      </p>
+      <p class="text-gray-700 mb-2">
+        11 vagas para quem quer comandar o jogo com IA — não ser comandado por ele.
+      </p>
+      <a href="https://www.canva.com/design/DAGqWdKBIM8/8TpHf9K3ATTbpTLfra3ZQA/view?utm_content=DAGqWdKBIM8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=ha1f8fd8801"
+         target="_blank"
+         class="inline-block text-indigo-600 font-medium hover:underline py-2"
+         aria-label="Torne-se um Guardião da Singularidade">
+        → Torne-se um Guardião da Singularidade
+      </a>
     </div>
+  </div>
 
-    <script type="module">
-      const sumarioEl = document.getElementById('lista-sumario');
-      const noticiasEl = document.getElementById('noticias');
+  <script type="module">
+    // Pega edição via query string: ?ed=2025-07-21_realidade-programada
+    const params = new URLSearchParams(location.search);
+    const edicao = params.get('ed') || '2025-07-21_realidade-programada';
+    const titleMap = {
+      '2025-07-14_entre_vozes_e_algoritmos': 'Entre vozes e algoritmos',
+      '2025-07-21_realidade-programada': 'Realidade Programada'
+      // adicione outros nomes aqui conforme necessário
+    };
 
-      window.noticias.sumario.forEach((titulo, i) => {
-        const id = window.noticias.blocos[i].id;
-        const li = document.createElement('li');
-        li.innerHTML = `<a href="#${id}" class="text-blue-600 hover:underline">${titulo}</a>`;
-        sumarioEl.appendChild(li);
+    import(`./editions/${edicao}.js`)
+      .then(mod => {
+        const data = mod.default;
+        document.title = `Guardiões da SINGULARIDADE — ${titleMap[edicao] || edicao}`;
+        document.getElementById('page-title').textContent =
+          `Guardiões da SINGULARIDADE — ${titleMap[edicao] || edicao}`;
+        renderNoticias(data);
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById('noticias').innerHTML =
+          '<p class="text-red-600">Não foi possível carregar a edição solicitada.</p>';
       });
 
-      window.noticias.blocos.forEach(noticia => {
+    function renderNoticias(data) {
+      const sumarioEl = document.getElementById('lista-sumario');
+      const noticiasEl = document.getElementById('noticias');
+      sumarioEl.innerHTML = '';
+      noticiasEl.innerHTML = '';
+
+      data.blocos.forEach((noticia, i) => {
+        const id = `noticia-${i}`;
+
+        // Sumário
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="#${id}"
+                             class="text-blue-600 hover:underline"
+                             aria-label="Ir para ${noticia.titulo}">
+                          ${noticia.titulo}
+                        </a>`;
+        sumarioEl.appendChild(li);
+
+        // Card de notícia
         const card = document.createElement('div');
-        card.id = noticia.id;
-        card.className = 'bg-white rounded-2xl shadow p-4';
+        card.id = id;
+        card.className = 'bg-white rounded-2xl shadow p-4 transition-transform hover:scale-[1.02] opacity-0 animate-fade-in';
 
         card.innerHTML = `
           <h2 class="text-xl font-semibold mb-2">${noticia.titulo}</h2>
           <p class="text-gray-700 mb-2">${noticia.resumo}</p>
-          <a href="${noticia.link}" target="_blank" class="text-blue-600 hover:underline">Leia mais</a>
+          <a href="${noticia.link}"
+             target="_blank"
+             class="inline-block text-indigo-600 font-medium hover:underline py-2"
+             aria-label="Leia mais sobre ${noticia.titulo}">
+            Leia mais →
+          </a>
         `;
 
         noticiasEl.appendChild(card);
       });
-    </script>
-  </body>
+    }
+  </script>
+</body>
 </html>
