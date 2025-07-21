@@ -3,28 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Guardiões da SINGULARIDADE</title>
+  <title>Guardiões da SINGULARIDADE — Realidade Programada</title>
 
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Open Graph (para WhatsApp, Facebook, etc.) -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://cannaiolo.github.io/newsletter-singularidade">
-  <meta property="og:title" content="Guardiões da SINGULARIDADE - Conhecimento Atemporal">
-  <meta property="og:description" content="As principais notícias de IA, imobiliário e investimentos em um só lugar.">
-  <meta property="og:image" content="https://images2.imgbox.com/43/dc/0Sz1QYww_o.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <!-- Open Graph / WhatsApp thumbnail -->
+  <link rel="image_src" href="https://images2.imgbox.com/43/dc/0Sz1QYww_o.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://cannaiolo.github.io/newsletter-singularidade" />
+  <meta property="og:title" content="Guardiões da SINGULARIDADE — Realidade Programada" />
+  <meta property="og:description" content="As principais notícias de IA, geopolítica e inovação em um só lugar." />
+  <meta property="og:image" content="https://images2.imgbox.com/43/dc/0Sz1QYww_o.png" />
 
   <style>
-    @keyframes fade-in {
-      from { opacity: 0; transform: translateY(1rem); }
-      to   { opacity: 1; transform: translateY(0); }
+    @keyframes fade-in { from { opacity:0; transform:translateY(1rem) } to { opacity:1; transform:translateY(0) } }
+    .animate-fade-in { animation: fade-in 0.5s ease-out forwards; }
+    @keyframes blink-fade {
+      0%,20%   { background-color: rgba(253,224,71,1); }
+      20%,40%  { background-color: rgba(253,224,71,0); }
+      40%,60%  { background-color: rgba(253,224,71,1); }
+      60%,80%  { background-color: rgba(253,224,71,0); }
+      80%,100% { background-color: rgba(253,224,71,0); }
     }
-    .animate-fade-in {
-      animation: fade-in 0.5s ease-out forwards;
-    }
+    .animate-blink-fade { animation: blink-fade 5s ease-out forwards; }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-800 p-4">
@@ -34,7 +36,7 @@
          class="mx-auto w-40 mb-6">
 
     <h1 id="page-title" class="text-3xl font-bold text-center mb-1">
-      Guardiões da SINGULARIDADE
+      Guardiões da SINGULARIDADE — Realidade Programada
     </h1>
     <p id="page-subtitle" class="text-center text-gray-600 text-lg mb-6">
       A news da sua Segunda-feira
@@ -46,30 +48,22 @@
     </section>
 
     <div id="noticias" class="space-y-10"></div>
-
-    <div class="mt-10 p-4 bg-white rounded-2xl shadow text-center">
-      <p class="text-xl font-semibold mb-2">
-        🥋 Novo ciclo aberto — Conhecimentos em Tecnologia de Ponta para Executivos
-      </p>
-      <p class="text-gray-700 mb-2">
-        11 vagas para quem quer comandar o jogo com IA — não ser comandado por ele.
-      </p>
-      <a href="https://www.canva.com/design/DAGqWdKBIM8/8TpHf9K3ATTbpTLfra3ZQA/view?utm_content=DAGqWdKBIM8&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=ha1f8fd8801"
-         target="_blank"
-         class="inline-block text-indigo-600 font-medium hover:underline py-2"
-         aria-label="Torne-se um Guardião da Singularidade">
-        → Torne-se um Guardião da Singularidade
-      </a>
-    </div>
   </div>
 
   <script type="module">
-    // Pega edição via query string: ?ed=2025-07-21_realidade-programada
+    // --- configuração de edição e títulos ---
     const params = new URLSearchParams(location.search);
     const edicao = params.get('ed') || '2025-07-21_realidade-programada';
     const titleMap = {
       '2025-07-14_entre_vozes_e_algoritmos': 'Entre vozes e algoritmos',
       '2025-07-21_realidade-programada': 'Realidade Programada'
+    };
+
+    // --- mapa de sons por notícia ---
+    const sounds = {
+      'noticia-0': new Audio('/sounds/crypto.mp3'),      // por exemplo
+      'noticia-1': new Audio('/sounds/mira.mp3'),
+      // adicione mais: 'noticia-2': new Audio('/sounds/chips.mp3'), etc
     };
 
     import(`./editions/${edicao}.js`)
@@ -82,9 +76,9 @@
         renderNoticias(data);
       })
       .catch(err => {
-        console.error("Falha ao carregar edição:", err);
+        console.error("Erro ao carregar edição:", err);
         document.getElementById('noticias').innerHTML =
-          '<p class="text-red-600">Não foi possível carregar a edição solicitada.</p>';
+          '<p class="text-red-600">Não foi possível carregar a edição.</p>';
       });
 
     function renderNoticias(data) {
@@ -96,7 +90,7 @@
       data.blocos.forEach((noticia, i) => {
         const id = `noticia-${i}`;
 
-        // Sumário
+        // --- SUMÁRIO ---
         const li = document.createElement('li');
         const a = document.createElement('a');
         a.href = `#${id}`;
@@ -106,17 +100,26 @@
         li.appendChild(a);
         sumarioEl.appendChild(li);
 
-        // ao clicar, destaca o card por 3s
+        // --- Evento de clique: som + destaque + scroll ---
         a.addEventListener('click', e => {
           e.preventDefault();
           const card = document.getElementById(id);
-          card.classList.add('bg-yellow-100');
+
+          // 1) tocar som, se existir
+          const snd = sounds[id];
+          if (snd) { snd.currentTime = 0; snd.play(); }
+
+          // 2) animação de destaque
+          card.classList.remove('animate-blink-fade');
+          void card.offsetWidth; 
+          card.classList.add('animate-blink-fade');
+
+          // 3) scroll suave
           card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          setTimeout(() => card.classList.remove('bg-yellow-100'), 3000);
           history.replaceState(null, '', `#${id}`);
         });
 
-        // Card de notícia
+        // --- CARD DE NOTÍCIA ---
         const card = document.createElement('div');
         card.id = id;
         card.className =
