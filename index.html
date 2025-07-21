@@ -13,16 +13,6 @@
     .animate-fade-in {
       animation: fade-in 0.5s ease-out forwards;
     }
-    @keyframes blink-fade {
-      0%, 20%   { background-color: rgba(253,224,71, 1); }
-      20%, 40%  { background-color: rgba(253,224,71, 0); }
-      40%, 60%  { background-color: rgba(253,224,71, 1); }
-      60%, 80%  { background-color: rgba(253,224,71, 0); }
-      80%,100%  { background-color: rgba(253,224,71, 0); }
-    }
-    .animate-blink-fade {
-      animation: blink-fade 5s ease-out forwards;
-    }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-800 p-4">
@@ -68,71 +58,77 @@
     const titleMap = {
       '2025-07-14_entre_vozes_e_algoritmos': 'Entre vozes e algoritmos',
       '2025-07-21_realidade-programada': 'Realidade Programada'
+      // adicione novas datas e nomes aqui conforme necessário
     };
 
     import(`./editions/${edicao}.js`)
       .then(mod => {
         const data = mod.default;
-        const tema = titleMap[edicao] || edicao;
-        document.title = `Guardiões da SINGULARIDADE — ${tema}`;
+        document.title = `Guardiões da SINGULARIDADE — ${titleMap[edicao] || edicao}`;
         document.getElementById('page-title').textContent =
-          `Guardiões da SINGULARIDADE — ${tema}`;
+          `Guardiões da SINGULARIDADE — ${titleMap[edicao] || edicao}`;
         renderNoticias(data);
       })
       .catch(err => {
-        console.error("falha ao carregar edição:", err);
+        console.error(err);
         document.getElementById('noticias').innerHTML =
           '<p class="text-red-600">Não foi possível carregar a edição solicitada.</p>';
       });
 
-    function renderNoticias(data) {
-      const sumarioEl = document.getElementById('lista-sumario');
-      const noticiasEl = document.getElementById('noticias');
-      sumarioEl.innerHTML = '';
-      noticiasEl.innerHTML = '';
-
-      data.blocos.forEach((noticia, i) => {
-        const id = `noticia-${i}`;
-
-        // Sumário
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = `#${id}`;
-        a.textContent = noticia.titulo;
-        a.className = 'text-blue-600 hover:underline';
-        a.setAttribute('aria-label', `Ir para ${noticia.titulo}`);
-        li.appendChild(a);
-        sumarioEl.appendChild(li);
-
-        // Destacar card piscando e fade ao clicar
-        a.addEventListener('click', e => {
-          e.preventDefault();
-          const card = document.getElementById(id);
-          card.classList.remove('animate-blink-fade');
-          void card.offsetWidth; // force reflow to restart animation
-          card.classList.add('animate-blink-fade');
-          card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          history.replaceState(null, '', `#${id}`);
+  function renderNoticias(data) {
+    const sumarioEl = document.getElementById('lista-sumario');
+    const noticiasEl = document.getElementById('noticias');
+    sumarioEl.innerHTML = '';
+    noticiasEl.innerHTML = '';
+  
+    data.blocos.forEach((noticia, i) => {
+      const id = `noticia-${i}`;
+  
+      // --- SUMÁRIO ---
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = `#${id}`;
+      a.textContent = noticia.titulo;
+      a.className = 'text-blue-600 hover:underline';
+      a.setAttribute('aria-label', `Ir para ${noticia.titulo}`);
+      li.appendChild(a);
+      sumarioEl.appendChild(li);
+  
+      // quando clicar no link, destaca o card por 3s
+      a.addEventListener('click', e => {
+        e.preventDefault();                // evita jump brusco
+        const card = document.getElementById(id);
+        card.classList.add('bg-yellow-100'); // cor de destaque
+        card.scrollIntoView({               // scroll suave até o card
+          behavior: 'smooth',
+          block: 'start'
         });
-
-        // Card de notícia
-        const card = document.createElement('div');
-        card.id = id;
-        card.className =
-          'bg-white rounded-2xl shadow p-4 transition-transform hover:scale-[1.02] opacity-0 animate-fade-in';
-        card.innerHTML = `
-          <h2 class="text-xl font-semibold mb-2">${noticia.titulo}</h2>
-          <p class="text-gray-700 mb-2">${noticia.resumo}</p>
-          <a href="${noticia.link}"
-             target="_blank"
-             class="inline-block text-indigo-600 font-medium hover:underline py-2"
-             aria-label="Leia mais sobre ${noticia.titulo}">
-            Leia mais →
-          </a>
-        `;
-        noticiasEl.appendChild(card);
+        setTimeout(() => {
+          card.classList.remove('bg-yellow-100');
+        }, 3000);
+        // atualiza a URL (opcional)
+        history.replaceState(null, '', `#${id}`);
       });
-    }
+  
+      // --- CARD DE NOTÍCIA ---
+      const card = document.createElement('div');
+      card.id = id;
+      card.className = 'bg-white rounded-2xl shadow p-4 transition-transform hover:scale-[1.02] opacity-0 animate-fade-in';
+  
+      card.innerHTML = `
+        <h2 class="text-xl font-semibold mb-2">${noticia.titulo}</h2>
+        <p class="text-gray-700 mb-2">${noticia.resumo}</p>
+        <a href="${noticia.link}"
+           target="_blank"
+           class="inline-block text-indigo-600 font-medium hover:underline py-2"
+           aria-label="Leia mais sobre ${noticia.titulo}">
+          Leia mais →
+        </a>
+      `;
+  
+      noticiasEl.appendChild(card);
+    });
+  }
   </script>
 </body>
 </html>
