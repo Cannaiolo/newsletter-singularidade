@@ -10,7 +10,7 @@ export default {
     {
       titulo: "Mercado de criptomoedas atinge US$ 4 trilhões após aprovação do GENIUS Act",
       resumo:
-        "O mercado cripto ultrapassou os US$ 4 trilhões em capitalização após o Congresso dos EUA aprovar o GENIUS Act, regulamentando stablecoins e atraindo investimentos institucionais. Bitcoin superou US$ 123 000, Ether subiu ~20% e altcoins registraram ganhos expressivos.",
+        "O mercado cripto ultrapassou os US$ 4 trilhões em capitalização após o Congresso dos EUA aprovar o GENIUS Act, regulamentando stablecoins e atraindo investimentos institucionais. Bitcoin superou US$ 123.000, Ether subiu ~20% e altcoins registraram ganhos expressivos.",
       link: "https://portaldobitcoin.uol.com.br/historico-primeiro-grande-projeto-de-lei-sobre-criptomoedas-e-aprovado-nos-eua/?utm_source=chatgpt.com"
     },
     {
