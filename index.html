@@ -75,43 +75,60 @@
           '<p class="text-red-600">Não foi possível carregar a edição solicitada.</p>';
       });
 
-    function renderNoticias(data) {
-      const sumarioEl = document.getElementById('lista-sumario');
-      const noticiasEl = document.getElementById('noticias');
-      sumarioEl.innerHTML = '';
-      noticiasEl.innerHTML = '';
-
-      data.blocos.forEach((noticia, i) => {
-        const id = `noticia-${i}`;
-
-        // Sumário
-        const li = document.createElement('li');
-        li.innerHTML = `<a href="#${id}"
-                             class="text-blue-600 hover:underline"
-                             aria-label="Ir para ${noticia.titulo}">
-                          ${noticia.titulo}
-                        </a>`;
-        sumarioEl.appendChild(li);
-
-        // Card de notícia
-        const card = document.createElement('div');
-        card.id = id;
-        card.className = 'bg-white rounded-2xl shadow p-4 transition-transform hover:scale-[1.02] opacity-0 animate-fade-in';
-
-        card.innerHTML = `
-          <h2 class="text-xl font-semibold mb-2">${noticia.titulo}</h2>
-          <p class="text-gray-700 mb-2">${noticia.resumo}</p>
-          <a href="${noticia.link}"
-             target="_blank"
-             class="inline-block text-indigo-600 font-medium hover:underline py-2"
-             aria-label="Leia mais sobre ${noticia.titulo}">
-            Leia mais →
-          </a>
-        `;
-
-        noticiasEl.appendChild(card);
+  function renderNoticias(data) {
+    const sumarioEl = document.getElementById('lista-sumario');
+    const noticiasEl = document.getElementById('noticias');
+    sumarioEl.innerHTML = '';
+    noticiasEl.innerHTML = '';
+  
+    data.blocos.forEach((noticia, i) => {
+      const id = `noticia-${i}`;
+  
+      // --- SUMÁRIO ---
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = `#${id}`;
+      a.textContent = noticia.titulo;
+      a.className = 'text-blue-600 hover:underline';
+      a.setAttribute('aria-label', `Ir para ${noticia.titulo}`);
+      li.appendChild(a);
+      sumarioEl.appendChild(li);
+  
+      // quando clicar no link, destaca o card por 3s
+      a.addEventListener('click', e => {
+        e.preventDefault();                // evita jump brusco
+        const card = document.getElementById(id);
+        card.classList.add('bg-yellow-100'); // cor de destaque
+        card.scrollIntoView({               // scroll suave até o card
+          behavior: 'smooth',
+          block: 'start'
+        });
+        setTimeout(() => {
+          card.classList.remove('bg-yellow-100');
+        }, 3000);
+        // atualiza a URL (opcional)
+        history.replaceState(null, '', `#${id}`);
       });
-    }
+  
+      // --- CARD DE NOTÍCIA ---
+      const card = document.createElement('div');
+      card.id = id;
+      card.className = 'bg-white rounded-2xl shadow p-4 transition-transform hover:scale-[1.02] opacity-0 animate-fade-in';
+  
+      card.innerHTML = `
+        <h2 class="text-xl font-semibold mb-2">${noticia.titulo}</h2>
+        <p class="text-gray-700 mb-2">${noticia.resumo}</p>
+        <a href="${noticia.link}"
+           target="_blank"
+           class="inline-block text-indigo-600 font-medium hover:underline py-2"
+           aria-label="Leia mais sobre ${noticia.titulo}">
+          Leia mais →
+        </a>
+      `;
+  
+      noticiasEl.appendChild(card);
+    });
+  }
   </script>
 </body>
 </html>
