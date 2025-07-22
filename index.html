@@ -63,8 +63,13 @@
     </div>
   </div>
 
+  <!-- Áudios locais (4 arquivos) -->
+  <audio id="sound-0" src="./som/arcade_lo_fi_fall.mp3" preload="auto"></audio>
+  <audio id="sound-1" src="./som/jump.mp3"           preload="auto"></audio>
+  <audio id="sound-2" src="./som/marimba.mp3"     preload="auto"></audio>
+  <audio id="sound-3" src="./som/retro_basic_blip.mp3"     preload="auto"></audio>
+
   <script type="module">
-    // Pega edição via query string: ?ed=2025-07-21_realidade-programada
     const params = new URLSearchParams(location.search);
     const edicao = params.get('ed') || '2025-07-21_realidade-programada';
     const titleMap = {
@@ -106,9 +111,14 @@
         li.appendChild(a);
         sumarioEl.appendChild(li);
 
-        // ao clicar, destaca o card por 3s
+        // Ao clicar: tocar som local + destacar + scroll
         a.addEventListener('click', e => {
           e.preventDefault();
+          const sound = document.getElementById(`sound-${i}`);
+          if (sound) {
+            sound.currentTime = 0;
+            sound.play();
+          }
           const card = document.getElementById(id);
           card.classList.add('bg-yellow-100');
           card.scrollIntoView({ behavior: 'smooth', block: 'start' });
